@@ -1,14 +1,13 @@
 import graphene
 
-import links.schema
-import links.schema_relay
+import org_units.schema
 import users.schema
-
+import modules.schema
 
 class Query(
     users.schema.Query,
-    links.schema.Query,
-    links.schema_relay.RelayQuery,
+    org_units.schema.Query,
+    modules.schema.Query,
     graphene.ObjectType,
 ):
     pass
@@ -16,11 +15,10 @@ class Query(
 
 class Mutation(
     users.schema.Mutation,
-    links.schema.Mutation,
-    links.schema_relay.RelayMutation,
+    org_units.schema.Mutation,
+    modules.schema.Mutation,
     graphene.ObjectType,
 ):
     pass
-
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

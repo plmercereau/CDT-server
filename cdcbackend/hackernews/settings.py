@@ -38,13 +38,26 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'graphene_django',
-    'links',
+    'corsheaders',
+    'core',
     'users',
+    'org_units',
+    'links',
+    'modules',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ORIGIN_WHITELIST = (
+    '127.0.0.1',
+    'localhost',
+    'localhost:8080',
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -124,6 +137,8 @@ STATIC_URL = '/static/'
 
 GRAPHENE = {
     'SCHEMA': 'hackernews.schema.schema',
+    # Max items returned in ConnectionFields / FilterConnectionFields
+    'RELAY_CONNECTION_MAX_LIMIT': 100,
 }
 
 AUTH_USER_MODEL = 'users.User'

@@ -12,3 +12,10 @@ class User(AbstractUser):
         if not self.token:
             self.token = binascii.hexlify(os.urandom(20)).decode()
         return super().save(*args, **kwargs)
+
+
+class OwnedModel(models.Model):
+    owned_by = models.ForeignKey('users.User', null=True, on_delete=models.deletion.DO_NOTHING)
+
+    class Meta:
+        abstract = True
